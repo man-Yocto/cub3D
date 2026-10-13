@@ -1,0 +1,15 @@
+# Build artifacts
+*.o
+*.a
+*.d
+*.dSYM/
+a.out
+cub3D
+.bonus_build
+minilibx-linux/
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store

@@ -2,6 +2,8 @@
 
 # cub3D
 
+[![CI](https://github.com/man-Yocto/cub3D/actions/workflows/ci.yml/badge.svg)](https://github.com/man-Yocto/cub3D/actions/workflows/ci.yml)
+
 ## Description
 
 **cub3D** is a 3D maze exploration engine inspired by the legendary **Wolfenstein 3D** — the world's first true First-Person Shooter. Built entirely in C using the **raycasting** technique, cub3D renders a dynamic 3D view of a 2D map in real time from a first-person perspective.
@@ -108,6 +110,23 @@ C 225,0,150                # Ceiling color (R,G,B)
 | `ESC`              | Exit the game            |
 
 ---
+
+## Key technical challenges
+
+- **DDA raycasting** — stepping each ray through the grid one cell boundary at a time
+  (`side_dist` / `delta_dist`) so wall hits are exact and cheap, one ray per screen column.
+- **No fish-eye** — using the *perpendicular* wall distance instead of the Euclidean one, so wall
+  height (`WIN_H / perp_wall_dist`) stays correct across the field of view.
+- **Texture mapping** — computing where on the wall the ray hit, picking the N/S/E/W texture by
+  hit side, and sampling the right texel column for every vertical stripe.
+- **Map validation** — rejecting maps that are not closed, using flood fill on a padded copy of the
+  map so irregular shapes and spaces are handled.
+- **Bonus features** — openable doors, collectible sprites, a minimap and mouse look, kept
+  separate from the mandatory build through `*_bonus.c` files.
+
+## What I learned
+
+<!-- TODO: write this section yourself -->
 
 ## Resources
 
